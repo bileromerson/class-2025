@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+
+        #tytle {
+            color: #333;
+            font-size: 24px;
+        }
+
+        #img {
+            margin: 20px auto;
+            width: 200px;
+            height: 200px;
+            background-color: #ccc;
+        }
+
+        button {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+        .cor {
+            background-color: orange;
+            border: #333 solid 4px;
+            padding: 3px;
+        }
+        #p{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1 id="tytle" class="cor">Escolha uma opcao a baixo:</h1>
+    </div>
+    <a href=""><div id="img" onmouseenter="mouseron()" onmouseout="mouseroff()"></div></a>
+    <div class="cor" id="p">
+        <p></p>
+    </div>
+    <div id="opcoes">
+        <button onclick="event1()">Opcao 1</button>
+        <button onclick="event2()">Opcao 2</button>
+        <button onclick="event3()">Opcao 3</button>
+
+    <script leng="js">
+        function event1() {
+            document.getElementById("tytle").innerHTML = "Você escolheu a opção 1!";
+            document.getElementById("p").style.display = "block";
+            document.getElementById("p").innerHTML = "Você escolheu a opção 1!";
+
+        }
+
+        function event2() {
+            document.getElementById("tytle").innerHTML = "Você escolheu a opção 2!";
+            document.getElementById("p").style.display = "block";
+            document.getElementById("p").innerHTML = "Você escolheu a opção 2!";
+        }
+
+        function event3() {
+            document.getElementById("tytle").innerHTML = "Você escolheu a opção 3!";
+            document.getElementById("p").style.display = "block";
+            document.getElementById("p").innerHTML = "Você escolheu a opção 3!";
+        }
+        function mouseron(){
+            document.getElementById("img").style.width= "230px";
+            document.getElementById("img").style.height= "230px";
+
+        }
+        function mouseroff() {
+            document.getElementById("img").style.width= "200px";
+            document.getElementById("img").style.height= "200px";
+        }
+    </script>
+</body>
+</html>
