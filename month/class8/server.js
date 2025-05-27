@@ -1,3 +1,9 @@
+/*
+POST: adicionar 
+GET: listar
+PATCH: atualizar
+DELETE: deletar
+*/
 
 let movies = [
     { id: 1, title: "Inception", genre: "Sci-Fi" },
@@ -33,16 +39,6 @@ if (index !== -1) {
     console.log('filme removido')
 }
 
-// 1 - Utilize o método forEa
-// somente os títulos dos filmes
-//  presentes no array movies.
-
-// 2- filme que você tenha adicionado) e atualize seu ano para 1989. Em
-//  seguida, exiba o filme atualizado no console.
-
-//  3- Crie uma função chamada listMoviesByGenre que receba como argumento o nome de um gênero (por exemplo, "Ficção Científica") e
-//  exiba no console todos os filmes que pertencem a esse gênero.
-
 function listMovieTitles() {
     movies.forEach(movie => {
         console.log(movie.title);
@@ -73,21 +69,3 @@ function listMoviesByGenre(genre) {
 listMovieTitles();
 updateMovieYear();
 listMoviesByGenre('Action');
-listMoviesByGenre('Sci-Fi');
-//  progect 03
-
-const express = require('express');
-const app = express();
-app.use(express.json());
-// start server on port 3000
-app.listen(3000, () => console.log('Server is running on port 3000'));
-/*
-let movies = [ // essa parte foi feita na aula pasada, veja o comeso do arquivo { id: 1, tytle: "Inception", genre: "Sci-Fi" },
-{ id: 2, title: "Mr.Robot", genre: "Action" },
-]; // sua lista de filmes
-*/
-app.get('/movies', (req, res) => {
-    res.json(movies);
-});
-
-
