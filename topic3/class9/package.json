@@ -1,0 +1,16 @@
+{
+  "name": "class9",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "D": "^1.0.0",
+    "nodemon": "^3.1.10"
+  }
+}

@@ -1,0 +1,19 @@
+
+<h2>ERROR 404: Page Not Found</h2>
+<h3>start the server on /servidor-basico and open http://localhost:3000/</h3>
+
+<p>execute the following command:</p> <button onclick="copiarTexto()" style="font-size: large; height: 20px; width: 150px; border-radius: 7px; color: thistle; background-color: black; padding-left: 10px;"><code>node index.js</code></button>
+<p>requirements</p>
+<ul>
+  <li>Node.js = http://nodejs.org/</li>
+  <li>npm = https://www.npmjs.com/</li>
+</ul>
+
+<script>
+function copiarTexto() {
+  const texto = "node index.js";
+  navigator.clipboard.writeText(texto).then(() => {
+    alert("Texto copiado: " + texto);
+  });
+}
+</script>
