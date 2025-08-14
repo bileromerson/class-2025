@@ -1,4 +1,4 @@
-const monogoose = require('mongoose'); //import mongoose to connect to MongoDB
+const mongoose = require('mongoose'); //import mongoose to connect to MongoDB
 
 const connectDB = async () => { // function to connect to MongoDB (more information on handling)
     try { //Try and Catch to verify if the connection is OK
