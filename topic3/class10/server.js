@@ -2,14 +2,13 @@ const express = require('express');
 const connectDB = require('./config/config');
 const Book = require('./models/book');
 const app = express();
-const validateTitle = require("./middleweares/validateTitle");
-const validateAuthor = require("./middleweares/validateAuthor");
-const validateYear = requeire("./middleweares/validateYear");
+const validateTitle = require("./middlewares/validateTitle");
+const validateAuthor = require("./middlewares/validateAuthor");
+const validateYear = require("./middlewares/validateYear");
 
 connectDB();
 app.use(express.json());
-
-app.post('/api/books', async (req, res) => {
+app.post("/api/books", validateTitle, validateAuthor, validateYear, async (req, res) => {
     try {
         const { title, author, year, genre } = req.body;
         const newBook = new Book({ title, author, year, genre });
@@ -95,3 +94,8 @@ app.use((err, req, res, next) => {
 //     }
 // });
 app.listen(3000, () => console.log('Server is running on port 3000'));
+
+const bookRoutes = require('./routes/bookRoutes');
+connectDB();
+app.use(express.json());
+app.use('/api', bookRoutes);
