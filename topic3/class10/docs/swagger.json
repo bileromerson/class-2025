@@ -1,0 +1,184 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Biblioteca Digital API",
+    "description": "Documentação da API da Biblioteca Digital"
+  },
+  "host": "localhost:3000",
+  "basePath": "/api",
+  "schemes": ["http"],
+  "paths": {
+    "/books": {
+      "post": {
+        "summary": "Criar um novo livro",
+        "description": "Adiciona um novo livro à biblioteca digital.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Dados do livro a ser criado",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": { "type": "string", "example": "O Senhor dos Anéis" },
+                "author": { "type": "string", "example": "J.R.R. Tolkien" },
+                "year": { "type": "integer", "example": 1954 },
+                "genre": { "type": "string", "example": "Fantasia" }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Livro criado com sucesso"
+          },
+          "500": {
+            "description": "Erro interno do servidor"
+          }
+        }
+      },
+      "get": {
+        "summary": "Listar todos os livros",
+        "description": "Obtém uma lista de todos os livros disponíveis na biblioteca digital.",
+        "responses": {
+          "200": {
+            "description": "Lista de livros recuperada com sucesso",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": { "type": "string", "example": "63dcb0f6e78a1d001f2f6275" },
+                  "title": { "type": "string", "example": "O Senhor dos Anéis" },
+                  "author": { "type": "string", "example": "J.R.R. Tolkien" },
+                  "year": { "type": "integer", "example": 1954 },
+                  "genre": { "type": "string", "example": "Fantasia" }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro interno do servidor"
+          }
+        }
+      }
+    },
+    "/books/{id}": {
+      "get": {
+        "summary": "Obter livro por ID",
+        "description": "Busca os detalhes de um livro específico pelo seu ID.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID do livro a ser buscado",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Detalhes do livro recuperados com sucesso",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": { "type": "string", "example": "63dcb0f6e78a1d001f2f6275" },
+                "title": { "type": "string", "example": "O Senhor dos Anéis" },
+                "author": { "type": "string", "example": "J.R.R. Tolkien" },
+                "year": { "type": "integer", "example": 1954 },
+                "genre": { "type": "string", "example": "Fantasia" }
+              }
+            }
+          },
+          "404": {
+            "description": "Livro não encontrado"
+          },
+          "500": {
+            "description": "Erro interno do servidor"
+          }
+        }
+      },
+      "patch": {
+        "summary": "Atualizar um livro",
+        "description": "Atualiza os detalhes de um livro específico pelo seu ID.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID do livro a ser atualizado",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Dados do livro a serem atualizados",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": { "type": "string", "example": "O Hobbit" },
+                "author": { "type": "string", "example": "J.R.R. Tolkien" },
+                "year": { "type": "integer", "example": 1937 },
+                "genre": { "type": "string", "example": "Fantasia" }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Livro atualizado com sucesso",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": { "type": "string", "example": "63dcb0f6e78a1d001f2f6275" },
+                "title": { "type": "string", "example": "O Hobbit" },
+                "author": { "type": "string", "example": "J.R.R. Tolkien" },
+                "year": { "type": "integer", "example": 1937 },
+                "genre": { "type": "string", "example": "Fantasia" }
+              }
+            }
+          },
+          "404": {
+            "description": "Livro não encontrado"
+          },
+          "500": {
+            "description": "Erro interno do servidor"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Excluir um livro",
+        "description": "Exclui um livro específico pelo seu ID.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID do livro a ser excluído",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Livro excluído com sucesso",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": { "type": "string", "example": "Livro excluído com sucesso" }
+              }
+            }
+          },
+          "404": {
+            "description": "Livro não encontrado"
+          },
+          "500": {
+            "description": "Erro interno do servidor"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,10 +1,13 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose');// importando o mongoose
+const bookSchema = new mongoose.Schema({
+   title: { type: String, required: [true, "O título é obrigatório"], minlength: [3, "O título deve ter pelo menos 3 caracteres"] },
+   author: { type: String, required: [true, "O autor é obrigatório"], minlength: [3, "O nome do autor deve ter pelo menos 3 caracteres"] },
+   year: { type: Number, required: [true, "O ano de publicação é obrigatório"], min: [1000, "Ano inválido"], max: [new Date().getFullYear(), "O ano não pode ser no futuro"] },
+   genre: { type: String, required: [true, "O gênero é obrigatório"] },
+   createdAt: { type: Date, default: Date.now },
+  });
+  
 
-const BookSchema = new mongoose.Schema({
-    title: {type: String, required:[true, "Title is required"], minlength: [3, "Title must be at least 3 characters long"]},
-    author: {type: String, required:[true, "Author is required"], minlength: [3, "Author must be at least 3 characters long"]},
-    year: {type: Number, required:[true, "Year is required"], min: [1000, "Year must be a positive number"], max: [new Date().getFullYear()]},
-    genre: {type: String, required:[true, "Genre is required"]},
-    createdAt: {type: Date, default: Date.now}
-});const Book = mongoose.model('Book', BookSchema);
+const Book = mongoose.model('Book', bookSchema);// criação do modelo usando o schema criado
+
 module.exports = Book;
