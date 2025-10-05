@@ -22,6 +22,8 @@ connectDB();
 
 app.use(express.json());
 
+app.use(express.urlencoded({extended:true}));
+
 app.post("/api/books", validateTitle, validateAuthor, validateYear, async (req, res) => {// cria uma rota HTTP do tipo POST, usada para enviar dados ao Servidor
   try {
     const { title, author, year, genre } = req.body; // Pega os campos  título, autor e etc. da requisição

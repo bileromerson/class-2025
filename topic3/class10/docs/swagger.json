@@ -42,24 +42,77 @@
       "get": {
         "summary": "Listar todos os livros",
         "description": "Obtém uma lista de todos os livros disponíveis na biblioteca digital.",
+        "parameters": [
+          {
+            "name":"title",
+            "in":"query",
+            "description": "filtra o livro por autor do livro",
+            "required":false,
+            "type":"string"
+
+        },
+        {
+          "name": "author",
+          "in":"query",
+          "description": "filtra o livro por autor do livro",
+          "required":false,
+          "type":"string"
+        },
+        {
+          "name": "genero",
+          "in":"query",
+          "description": "filtra o livro por genero do livro",
+          "required":false,
+          "type":"string"
+        },
+        {
+          "name": "pageNumber",
+          "in": "query",
+          "description": "Número da página a ser retornado",
+          "required": false,
+          "type": "integer"
+        },
+        {
+          "name": "pageSize",
+          "in": "query",
+          "description": "Número de resultados por página",
+          "required": false,
+          "type": "integer"
+        },
+        {
+          "name": "sortBy",
+          "in": "query",
+          "description": "Campo pelo qual os resultados serao ordenados",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "name": "order",
+          "in": "query",
+          "description": "Ordem de clasificacao",
+          "required": false,
+          "type": "string",
+          "enum": ["asc", "desc"]
+        }
+      ],
         "responses": {
           "200": {
             "description": "Lista de livros recuperada com sucesso",
             "schema": {
               "type": "array",
               "items": {
-                "type": "object",
-                "properties": {
-                  "id": { "type": "string", "example": "63dcb0f6e78a1d001f2f6275" },
-                  "title": { "type": "string", "example": "O Senhor dos Anéis" },
-                  "author": { "type": "string", "example": "J.R.R. Tolkien" },
-                  "year": { "type": "integer", "example": 1954 },
-                  "genre": { "type": "string", "example": "Fantasia" }
-                }
+              "type": "object",
+              "properties": {
+                "id": { "type": "string", "example": "63dcb0f6e78a1d001f2f6275" },
+                "title": { "type": "string", "example": "O Senhor dos Anéis" },
+                "author": { "type": "string", "example": "J.R.R. Tolkien" },
+              "year": { "type": "integer", "example": 1954 },
+              "genre": { "type": "string", "example": "Fantasia" }
               }
             }
-          },
-          "500": {
+          }
+        },
+        "500": {
             "description": "Erro interno do servidor"
           }
         }

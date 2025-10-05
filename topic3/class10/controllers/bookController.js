@@ -23,21 +23,35 @@ const createBook = async (req, res) => {//Observe que esse código pode ser reap
     }
    };
 
-const listBookbyId =  async (req, res, next) => {//observe o :id aqui, o que você acha que ele faz?
-    try {
-      const { id } = req.params;//params = parametros. Que parâmetro estamos usando para buscar o livro?
-      const book = await Book.findById(id);// o que significa "find" em inglês?
-   
-      if (!book) {//! => "não". Se o Livro não for encontrado
-        return res.status(404).json({ error: "Livro não encontrado" });
+const listBookbyId =  async (req, res, next) => {
+  try{
+      let query ={}; // cria um obj vasio que armazenara o valor da busca 
+      if (req.query.title) { // verifica se o codico foi enviado para efetuar a busca
+        query.title = {$regex: req.query.title, $options: 'i'};// permite a busca ignorando letra maiuscula e minuscula
       }
-   
-      res.json(book);
-    } catch (err) {// aqui é se der algum erro
-      next(err);
-      //res.status(500).json({ error: "Erro ao buscar livro" });
+      if (req.query.author) { //verifica se o author foi enviado para efetuar a usca
+        query.author = req.query.author;
+      }
+      if (req.query.genre) { //verifica se o genero foi enviado para efetuar a usca
+        query.genre = req.query.genre;
+      }
+      let sort = {}; //obj vazio que armazenara o valor da ordenação
+      if(req.query.sortBy) { //verifica se o sortBy foi enviado para efetuar a ordenação
+        const sortField = req.query.sortBy;
+        const sortOrder = req.query.order === 'desc' ? -1 : 1; // se order for desc, ordena de forma decrescente, senão crescente
+        sort[sortField] = sortOrder;
+      }
+      const pageNumber = parseInt(req.query.pageNumber) || 1; // pega a pagina solicitada pelo usuario, se não for informada, considera a pagina 1
+      const pageSize = parseInt(req.query.pageSize) || 5; // define a quantidade de livros por pagina, se não for informada, considera 5
+      // quantos registros pular antes de buscar os livros
+      const skip = (pageNumber - 1) * pageSize;
+      const books = await (await Book.find(query)).toSorted(sort).skip(skip).limit(pageSize); // realiza a busca no BD com os filtron definidos
+      res.json(books); // retorna os livros encontrados no formato JSON
     }
-  };
+    catch (err) {// aqui é se der algum erro
+    next(err);
+  }
+};
 
 
  const updateBook = async (req, res) => {//definindo a rota tipo PATCH
